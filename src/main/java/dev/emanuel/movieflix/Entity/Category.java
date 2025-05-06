@@ -1,4 +1,4 @@
-package dev.emanuel.movieflix.entity;
+package dev.emanuel.movieflix.Entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

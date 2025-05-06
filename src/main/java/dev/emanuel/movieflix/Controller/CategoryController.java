@@ -1,7 +1,7 @@
 package dev.emanuel.movieflix.Controller;
 
 import dev.emanuel.movieflix.Service.CategoryService;
-import dev.emanuel.movieflix.entity.Category;
+import dev.emanuel.movieflix.Entity.Category;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

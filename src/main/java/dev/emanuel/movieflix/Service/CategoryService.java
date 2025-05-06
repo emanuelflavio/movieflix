@@ -1,7 +1,7 @@
 package dev.emanuel.movieflix.Service;
 
 import dev.emanuel.movieflix.Repository.CategoryRepository;
-import dev.emanuel.movieflix.entity.Category;
+import dev.emanuel.movieflix.Entity.Category;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
