@@ -1,4 +1,4 @@
-CREATE TABLE movie_streaming(
+CREATE TABLE IF NOT EXISTS movie_streaming(
     movie_id BIGINT UNSIGNED,
     streaming_id BIGINT UNSIGNED,
     CONSTRAINT fk_movie_streamig_movie FOREIGN KEY(movie_id) REFERENCES movie(id),

@@ -1,4 +1,4 @@
-CREATE TABLE movie_category(
+CREATE TABLE IF NOT EXISTS movie_category(
     movie_id BIGINT UNSIGNED,
     category_id BIGINT UNSIGNED,
     CONSTRAINT fk_movie_category_movie FOREIGN KEY(movie_id) REFERENCES movie(id),
