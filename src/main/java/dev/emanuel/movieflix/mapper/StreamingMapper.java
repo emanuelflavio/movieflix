@@ -4,7 +4,6 @@ import dev.emanuel.movieflix.Controller.request.StreamingRequest;
 import dev.emanuel.movieflix.Controller.response.StreamingResponse;
 import dev.emanuel.movieflix.Entity.Streaming;
 import lombok.experimental.UtilityClass;
-import org.springframework.stereotype.Component;
 
 @UtilityClass
 public class StreamingMapper {
