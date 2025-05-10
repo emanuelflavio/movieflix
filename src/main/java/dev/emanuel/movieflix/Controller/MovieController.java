@@ -3,7 +3,6 @@ package dev.emanuel.movieflix.Controller;
 import dev.emanuel.movieflix.Controller.request.MovieRequest;
 import dev.emanuel.movieflix.Controller.response.MovieResponse;
 import dev.emanuel.movieflix.Entity.Movie;
-import dev.emanuel.movieflix.Repository.MovieRepository;
 import dev.emanuel.movieflix.Service.MovieService;
 import dev.emanuel.movieflix.mapper.MovieMapper;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -40,5 +40,31 @@ public class MovieController {
         return service.findById(id)
                 .map(movie -> ResponseEntity.ok(MovieMapper.toMovieResponse(movie)))
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<MovieResponse> update(@PathVariable Long id, @RequestBody MovieRequest request) {
+        return service.update(id, MovieMapper.toMovie(request))
+                .map(movie -> ResponseEntity.ok(MovieMapper.toMovieResponse(movie)))
+                .orElse(ResponseEntity.notFound().build());
+
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<MovieResponse>> findByCategory(@RequestParam Long category) {
+        return ResponseEntity.ok(service.findByCategories(category)
+                .stream()
+                .map(MovieMapper::toMovieResponse)
+                .toList());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        Optional<Movie> optMovie = service.findById(id);
+        if (optMovie.isPresent()) {
+            service.deleteById(id);
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 }
