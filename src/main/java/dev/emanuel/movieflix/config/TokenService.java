@@ -30,21 +30,24 @@ public class TokenService {
                 .sign(algorithm);
     }
 
-    public Optional<JWTUserData> validateToken(String token) {
+    public Optional<JWTUserData> verifyToken(String token) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
 
-            DecodedJWT decode = JWT.require(algorithm)
+            DecodedJWT jwt = JWT.require(algorithm)
                     .build()
                     .verify(token);
 
-            return Optional.of(JWTUserData.builder()
-                    .email(decode.getSubject())
-                    .userId(decode.getClaim("userId").asLong())
+            return Optional.of(JWTUserData
+                    .builder()
+                    .id(jwt.getClaim("userId").asLong())
+                    .name(jwt.getClaim("name").asString())
+                    .email(jwt.getSubject())
                     .build());
 
-        } catch (JWTVerificationException ex) {
+        } catch (JWTVerificationException ex){
             return Optional.empty();
         }
     }
+
 }
